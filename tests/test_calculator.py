@@ -29,15 +29,16 @@ def test_divide_by_one():
     assert calc.divide(7, 1) == 7
 
 
-def test_divide_by_zero_raises():
+def test_divide_by_zero_raises_valueerror_with_message():
     calc = Calculator()
-    with pytest.raises(InvalidInputException):
+    # Message is checked strictly to kill message-mutation survivors
+    with pytest.raises(ValueError, match=r"^Cannot divide by zero$"):
         calc.divide(5, 0)
 
 
-def test_divide_invalid_input_raises():
+def test_divide_invalid_input_raises_typeerror():
     calc = Calculator()
-    with pytest.raises(InvalidInputException):
+    with pytest.raises(TypeError):
         calc.divide("5", 2)
 
 
@@ -99,7 +100,4 @@ class TestDivision:
         calc = Calculator()
         assert calc.divide(6, 3) == 2
 
-    def test_divide_positive_numbers(self):
-        calc = Calculator()
-        assert calc.divide(6, 3) == 2
 
