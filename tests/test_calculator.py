@@ -6,7 +6,9 @@ import pytest
 from calculator.calculator import Calculator, InvalidInputException
 
 
-# ---- Extra divide tests (for mutation testing) ----
+# ----------------------------
+# Extra tests for mutation testing (focus on divide)
+# ----------------------------
 def test_divide_returns_float():
     calc = Calculator()
     assert calc.divide(5, 2) == 2.5
@@ -27,7 +29,21 @@ def test_divide_by_one():
     assert calc.divide(7, 1) == 7
 
 
-# ---- Original tests ----
+def test_divide_by_zero_raises():
+    calc = Calculator()
+    with pytest.raises(InvalidInputException):
+        calc.divide(5, 0)
+
+
+def test_divide_invalid_input_raises():
+    calc = Calculator()
+    with pytest.raises(InvalidInputException):
+        calc.divide("5", 2)
+
+
+# ----------------------------
+# Basic operation tests
+# ----------------------------
 class TestAddition:
     """Tests for the add method."""
 
@@ -78,6 +94,10 @@ class TestMultiplication:
 
 class TestDivision:
     """Tests for the divide method."""
+
+    def test_divide_positive_numbers(self):
+        calc = Calculator()
+        assert calc.divide(6, 3) == 2
 
     def test_divide_positive_numbers(self):
         calc = Calculator()
