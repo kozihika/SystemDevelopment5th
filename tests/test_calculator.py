@@ -1,26 +1,33 @@
 """
 Test suite for the Calculator class.
 """
+
+import pytest
+from calculator.calculator import Calculator, InvalidInputException
+
+
+# ---- Extra divide tests (for mutation testing) ----
 def test_divide_returns_float():
     calc = Calculator()
     assert calc.divide(5, 2) == 2.5
+
 
 def test_divide_zero_numerator():
     calc = Calculator()
     assert calc.divide(0, 5) == 0
 
+
 def test_divide_negative_numbers():
     calc = Calculator()
     assert calc.divide(-6, 3) == -2
 
+
 def test_divide_by_one():
     calc = Calculator()
     assert calc.divide(7, 1) == 7
-    
-import pytest
-from calculator.calculator import Calculator, InvalidInputException
 
 
+# ---- Original tests ----
 class TestAddition:
     """Tests for the add method."""
 
@@ -75,7 +82,4 @@ class TestDivision:
     def test_divide_positive_numbers(self):
         calc = Calculator()
         assert calc.divide(6, 3) == 2
-
-
-
 
